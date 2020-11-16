@@ -1,0 +1,17 @@
+name: custom_timer
+description: A highly customizable timer builder, with controller, animation, intervals, callbacks, custom actions, and more!
+version: 0.0.1
+author: Federico De Sía
+homepage: 
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
