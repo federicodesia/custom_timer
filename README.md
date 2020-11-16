@@ -4,6 +4,10 @@ A highly customizable timer builder, with controller, animation, intervals, call
 
 <br>
 
+<img width="232px" alt="Example image" src="https://raw.githubusercontent.com/federicodesia/custom_timer/master/images/example.gif"/>
+
+<br>
+
 ## 📌 Simple Usage
 
 ```dart
@@ -60,7 +64,6 @@ There are several options that allow for more control:
 | `onChangeStateAnimation`| AnimatedSwitcher | Animation that runs when the state of the timer changes. It is not necessary to define a child because it will be replaced by the current builder.|
 
 <br>
-<br>
 
 ### CustomTimerAction actions:
 
@@ -70,7 +73,6 @@ There are several options that allow for more control:
 | `CustomTimerAction.go_to_end` | Shows the end of the timer. |
 | `CustomTimerAction.auto_start` | Automatically starts the timer. |
 
-<br>
 <br>
 
 ### CustomTimerRemainingTime properties:
@@ -87,7 +89,6 @@ There are several options that allow for more control:
 | `milliseconds` | A string with the milliseconds remaining. |
 | `duration` | A default Duration with remaining time.<br>Lets you create more specific functions or conditions, but remember that it can return more than 59 minutes and seconds and more than 1000 milliseconds. |
 
-<br>
 <br>
 
 ### CustomTimerState states:
@@ -109,7 +110,6 @@ For example:
 CustomTimerState state = _controller.state;
 ```
 
-<br>
 <br>
 
 ## 📌 Using the `CustomTimerController`
@@ -185,7 +185,6 @@ CustomTimerState state = _controller.state;
 | `pause()` | Pause the timer. |
 | `reset()` | Reset the timer.<br>If you want to restart the timer, you can call the controller `start()` method or set the `onResetAction` property to CustomTimerAction.auto_start.|
 
-<br>
 <br>
 
 ## ⚙️ Installation
