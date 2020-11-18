@@ -2,4 +2,4 @@
 
 This is the initial release of the custom_timer package. This includes features such as
 - Timer builders with customization options
-- Manually controlling the custom timer via the PanelController
+- Manually controlling the custom timer via the CustomTimerController
