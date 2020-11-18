@@ -4,7 +4,7 @@ A highly customizable timer builder, with controller, animation, intervals, call
 
 <br>
 
-<img width="232px" alt="Example image" src="https://raw.githubusercontent.com/federicodesia/custom_timer/master/images/example.gif"/>
+<img width="320px" alt="Example image" src="https://raw.githubusercontent.com/federicodesia/custom_timer/master/images/example.gif"/>
 
 <br>
 
@@ -21,7 +21,6 @@ A highly customizable timer builder, with controller, animation, intervals, call
         ),
         body: Center(
           child: CustomTimer(
-            controller: _controller,
             from: Duration(hours: 12),
             to: Duration(hours: 0),
             onBuildAction: CustomTimerAction.auto_start,
@@ -41,7 +40,7 @@ A highly customizable timer builder, with controller, animation, intervals, call
 <br>
 
 ## 📌 Custom Usage
-There are several options that allow for more control:
+Options that allow for more control:
 
 |  Properties  | Type | Description |
 |--------------|-----------|-------------|
@@ -80,13 +79,13 @@ There are several options that allow for more control:
 |  Properties  | Description |
 |--------------|-----------|
 | `days` | A string with the remaining days. |
-| `hours` | A string with the hours remaining. |
+| `hours` | A string with the remaining hours. |
 | `hoursWithoutFill` | A String with the remaining hours and only with two digits when necessary. |
 | `minutes` | A string with the minutes remaining. |
 | `minutesWithoutFill` | A String with the remaining minutes and only with two digits when necessary. |
 | `seconds` | A string with the seconds remaining. |
 | `secondsWithoutFill` | A String with the remaining seconds and only with two digits when necessary. |
-| `milliseconds` | A string with the milliseconds remaining. |
+| `milliseconds` | A string with the remaining milliseconds. |
 | `duration` | A default Duration with remaining time.<br>Lets you create more specific functions or conditions, but remember that it can return more than 59 minutes and seconds and more than 1000 milliseconds. |
 
 <br>
