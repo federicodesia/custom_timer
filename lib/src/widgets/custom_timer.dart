@@ -145,14 +145,17 @@ class _CustomTimerState extends State<CustomTimer> {
   Widget _returnWidget;
   Timer _timer;
   Duration _duration;
+  CustomTimerController _controller;
 
   @override
   void initState() {
+    widget.controller != null ? _controller = widget.controller : _controller = new CustomTimerController();
+
     // Set the functions and state of the timer controller.
-    widget.controller?.onSetStart(() => _startTimer());
-    widget.controller?.onSetPause(_onTimerPaused);
-    widget.controller?.onSetReset(_onTimerReset);
-    widget.controller?.state = CustomTimerState.reset;
+    _controller.onSetStart(() => _startTimer());
+    _controller.onSetPause(_onTimerPaused);
+    _controller.onSetReset(_onTimerReset);
+    _controller.state = CustomTimerState.reset;
 
     _action(widget.onBuildAction);
 
@@ -177,13 +180,13 @@ class _CustomTimerState extends State<CustomTimer> {
   }
 
   void _startTimer() {
-    if (widget.controller?.state != CustomTimerState.counting) {
+    if (_controller.state != CustomTimerState.counting) {
       // If the timer was paused when the function was called, start the timer from the same time.
       // Otherwise, set the timer at the start time.
-      if (widget.controller?.state != CustomTimerState.paused)
+      if (_controller.state != CustomTimerState.paused)
         setState(() => _duration = widget.from);
 
-      widget.controller?.state = CustomTimerState.counting;
+      _controller.state = CustomTimerState.counting;
       if (widget.onStart != null) widget.onStart();
       _onChangeState();
 
@@ -220,7 +223,7 @@ class _CustomTimerState extends State<CustomTimer> {
 
   void _onTimerFinished() {
     _timer.cancel();
-    widget.controller?.state = CustomTimerState.finished;
+    _controller.state = CustomTimerState.finished;
 
     if (widget.onFinish != null) widget.onFinish();
     _onChangeState();
@@ -228,7 +231,7 @@ class _CustomTimerState extends State<CustomTimer> {
     _action(widget.onFinishAction);
 
     // Return the widget if the finishedBuilder is being used
-    if (widget.controller?.state == CustomTimerState.finished &&
+    if (_controller.state == CustomTimerState.finished &&
         widget.finishedBuilder != null) {
       setState(() => _returnWidget = widget
           .finishedBuilder(CustomTimerRemainingTime(duration: _duration)));
@@ -236,8 +239,8 @@ class _CustomTimerState extends State<CustomTimer> {
   }
 
   void _onTimerPaused() {
-    if (widget.controller?.state != CustomTimerState.paused) {
-      widget.controller?.state = CustomTimerState.paused;
+    if (_controller.state != CustomTimerState.paused) {
+      _controller.state = CustomTimerState.paused;
       _timer?.cancel();
 
       if (widget.onPaused != null) widget.onPaused();
@@ -253,8 +256,8 @@ class _CustomTimerState extends State<CustomTimer> {
   }
 
   void _onTimerReset() {
-    if (widget.controller?.state != CustomTimerState.reset) {
-      widget.controller?.state = CustomTimerState.reset;
+    if (_controller.state != CustomTimerState.reset) {
+      _controller.state = CustomTimerState.reset;
 
       if (widget.onReset != null) widget.onReset();
       _onChangeState();
@@ -262,7 +265,7 @@ class _CustomTimerState extends State<CustomTimer> {
       _action(widget.onResetAction);
 
       // Return the widget if the resetBuilder is being used.
-      if (widget.controller?.state == CustomTimerState.reset &&
+      if (_controller.state == CustomTimerState.reset &&
           widget.resetBuilder != null) {
         setState(() => _returnWidget =
             widget.resetBuilder(CustomTimerRemainingTime(duration: _duration)));
@@ -273,7 +276,7 @@ class _CustomTimerState extends State<CustomTimer> {
 
   void _onChangeState() {
     if (widget.onChangeState != null)
-      widget.onChangeState(widget.controller?.state);
+      widget.onChangeState(_controller.state);
   }
 
   @override

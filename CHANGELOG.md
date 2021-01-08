@@ -1,3 +1,7 @@
+## [0.0.3] - Jan. 8, 2021
+
+- Added internal Custom Timer Controller for proper function of builders.
+
 ## [0.0.2] - Nov. 18, 2020
 
 - Structured code in different files.
