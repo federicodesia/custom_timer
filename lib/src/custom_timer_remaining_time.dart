@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'utils/utils.dart';
 
 /// Remaining time for CustomTimer.
@@ -8,12 +6,12 @@ import 'utils/utils.dart';
 ///
 /// If you want to show the remaining time with two digits only when necessary, you can use `hoursWithoutFill`, `minutesWithoutFill` or `secondsWithoutFill`.
 class CustomTimerRemainingTime {
-  CustomTimerRemainingTime({@required this.duration});
+  CustomTimerRemainingTime({required this.duration});
 
   /// Default duration with remaining time.
   ///
   /// If you do use it, remember that functions can return you numbers higher than 59.
-  final Duration duration;
+  Duration duration = new Duration();
 
   /// Get the remaining days.
   String get days => duration.inDays.toString();

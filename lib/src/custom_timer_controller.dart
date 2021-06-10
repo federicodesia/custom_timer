@@ -5,15 +5,15 @@ import 'widgets/custom_timer.dart';
 /// Controller for CustomTimer.
 class CustomTimerController {
   /// The callback function that executes when the `start` method is called.
-  VoidCallback _onStart;
+  VoidCallback? _onStart;
 
   /// The callback function that executes when the `pause` method is called.
-  VoidCallback _onPause;
+  VoidCallback? _onPause;
 
   /// The callback function that executes when the `reset` method is called.
-  VoidCallback _onReset;
+  VoidCallback? _onReset;
 
-  CustomTimerState _state;
+  CustomTimerState _state = CustomTimerState.finished;
 
   /// The current state of the timer.
   ///
@@ -35,21 +35,21 @@ class CustomTimerController {
 
   /// Start the timer.
   start() {
-    if (this._onStart != null) this._onStart();
+    this._onStart!();
   }
 
   onSetStart(VoidCallback onStart) => this._onStart = onStart;
 
   /// Set timer in pause.
   pause() {
-    if (this._onPause != null) this._onPause();
+    this._onPause!();
   }
 
   onSetPause(VoidCallback onPause) => this._onPause = onPause;
 
   /// Reset the timer.
   reset() {
-    if (this._onReset != null) this._onReset();
+    this._onReset!();
   }
 
   onSetReset(VoidCallback onReset) => this._onReset = onReset;

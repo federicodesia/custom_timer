@@ -1,3 +1,7 @@
+## [0.0.4] - Jun. 10, 2021
+
+- Support null safety.
+
 ## [0.0.3] - Jan. 8, 2021
 
 - Added internal Custom Timer Controller for proper function of builders.

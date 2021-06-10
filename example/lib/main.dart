@@ -39,17 +39,17 @@ class _MyAppState extends State<MyApp> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                FlatButton(
+                MaterialButton(
                   child: Text("Start", style: TextStyle(color: Colors.white)),
                   onPressed: () => _controller.start(),
                   color: Colors.green,
                 ),
-                FlatButton(
+                MaterialButton(
                   child: Text("Pause", style: TextStyle(color: Colors.white)),
                   onPressed: () => _controller.pause(),
                   color: Colors.blue,
                 ),
-                FlatButton(
+                MaterialButton(
                   child: Text("Reset", style: TextStyle(color: Colors.white)),
                   onPressed: () => _controller.reset(),
                   color: Colors.red
