@@ -33,6 +33,13 @@ class CustomTimerController {
   /// Constructor.
   CustomTimerController();
 
+  /// Dispose method.
+  dispose() {
+    _onStart = null;
+    _onPause = null;
+    _onReset = null;
+  }
+
   /// Start the timer.
   start() {
     this._onStart!();

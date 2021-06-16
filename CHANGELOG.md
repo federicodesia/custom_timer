@@ -1,3 +1,7 @@
+## [0.0.5] - Jun. 16, 2021
+
+- CustomTimerController dispose method.
+
 ## [0.0.4] - Jun. 10, 2021
 
 - Support null safety.

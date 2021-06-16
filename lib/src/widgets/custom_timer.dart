@@ -143,7 +143,7 @@ class _CustomTimerState extends State<CustomTimer> {
   Widget? _returnWidget;
   Timer? _timer;
   Duration _duration = new Duration();
-  CustomTimerController _controller = new CustomTimerController();
+  late CustomTimerController _controller;
 
   @override
   void initState() {
@@ -156,14 +156,13 @@ class _CustomTimerState extends State<CustomTimer> {
     _controller.state = CustomTimerState.reset;
 
     _action(widget.onBuildAction);
-
     super.initState();
   }
 
   @override
   void dispose() {
     if (_timer?.isActive == true) _timer?.cancel();
-
+    if(widget.controller == null) _controller.dispose();
     super.dispose();
   }
 
