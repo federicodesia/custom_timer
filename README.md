@@ -191,7 +191,7 @@ CustomTimerState state = _controller.state;
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_timer: ^0.0.5
+  custom_timer: ^0.0.6
 ```
 
 Install it:

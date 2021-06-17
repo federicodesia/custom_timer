@@ -1,3 +1,7 @@
+## [0.0.6] - Jun. 16, 2021
+
+- Bug fixes.
+
 ## [0.0.5] - Jun. 16, 2021
 
 - CustomTimerController dispose method.
