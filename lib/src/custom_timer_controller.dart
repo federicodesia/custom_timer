@@ -1,63 +1,60 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/custom_timer.dart';
+/// State for CustomTimer.
+enum CustomTimerState { reset, paused, counting, finished }
 
-/// Controller for CustomTimer.
-class CustomTimerController {
-  /// The callback function that executes when the `start` method is called.
-  VoidCallback? _onStart;
+class CustomTimerController extends ChangeNotifier {
+  
+  /// Controller for CustomTimer.
+  CustomTimerController({
+    this.initialState = CustomTimerState.reset
+  });
 
-  /// The callback function that executes when the `pause` method is called.
-  VoidCallback? _onPause;
+  /// Defines the initial state of the timer. By default it is `CustomTimerState.reset`
+  final CustomTimerState initialState;
 
-  /// The callback function that executes when the `reset` method is called.
-  VoidCallback? _onReset;
+  late CustomTimerState _state = initialState;
 
-  CustomTimerState _state = CustomTimerState.finished;
+  /// Current state of the timer.
+  CustomTimerState get state => _state;
 
-  /// The current state of the timer.
-  ///
-  /// This allows you to create custom functions or conditions. For example:
-  ///
-  /// ``` dart
-  ///   if(_controller.state == CustomTimerState.finished)...
-  /// ```
-  CustomTimerState get state {
-    return _state;
+  /// Timer pause function.
+  void pause(){
+    if(!_disposed){
+      _state = CustomTimerState.paused;
+      notifyListeners();
+    }
   }
 
-  set state(value) {
-    this._state = value;
+  /// Timer start function.
+  void start({bool disableNotifyListeners = false}){
+    if(!_disposed){
+      _state = CustomTimerState.counting;
+      if(!disableNotifyListeners) notifyListeners();
+    }
   }
 
-  /// Constructor.
-  CustomTimerController();
-
-  /// Dispose method.
-  dispose() {
-    _onStart = null;
-    _onPause = null;
-    _onReset = null;
+  /// Timer reset function.
+  void reset(){
+    if(!_disposed){
+      _state = CustomTimerState.reset;
+      notifyListeners();
+    }
   }
 
-  /// Start the timer.
-  start() {
-    this._onStart!();
+  /// Timer finish function.
+  void finish(){
+    if(!_disposed){
+      _state = CustomTimerState.finished;
+      notifyListeners();
+    }
   }
 
-  onSetStart(VoidCallback onStart) => this._onStart = onStart;
+  bool _disposed = false;
 
-  /// Set timer in pause.
-  pause() {
-    this._onPause!();
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
   }
-
-  onSetPause(VoidCallback onPause) => this._onPause = onPause;
-
-  /// Reset the timer.
-  reset() {
-    this._onReset!();
-  }
-
-  onSetReset(VoidCallback onReset) => this._onReset = onReset;
 }

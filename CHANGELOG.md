@@ -1,3 +1,11 @@
+## [0.1.0] - Dec. 30, 2021
+
+New version of the package.
+- Correct operation of the milliseconds of the timer.
+- New controller using state notifications.
+- New builders with reduced code.
+- Timer widget optimization.
+
 ## [0.0.6] - Jun. 16, 2021
 
 - Bug fixes.

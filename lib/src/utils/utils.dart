@@ -1,2 +1,2 @@
-/// Function to fill with a zero and always show two digits.
-String fill(int n) => n.toString().padLeft(2, "0");
+/// Function to fill with leading zeros.
+String fill(int n, {int count = 2}) => n.toString().padLeft(count, "0");

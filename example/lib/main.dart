@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:custom_timer/custom_timer.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -10,7 +9,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  final CustomTimerController _controller = new CustomTimerController();
+  final CustomTimerController _controller = CustomTimerController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,42 +28,76 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+
             CustomTimer(
               controller: _controller,
-              from: Duration(hours: 12),
-              to: Duration(hours: 0),
-              interval: Duration(seconds: 1),
-              builder: (CustomTimerRemainingTime remaining) {
+              begin: Duration(days: 1),
+              end: Duration(),
+              builder: (remaining) {
                 return Text(
-                  "${remaining.hours}:${remaining.minutes}:${remaining.seconds}",
-                  style: TextStyle(fontSize: 30.0),
+                  "${remaining.hours}:${remaining.minutes}:${remaining.seconds}.${remaining.milliseconds}",
+                  style: TextStyle(fontSize: 24.0)
                 );
-              },
+              }
             ),
-            SizedBox(height: 16.0,),
+
+            SizedBox(height: 24.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                MaterialButton(
-                  child: Text("Start", style: TextStyle(color: Colors.white)),
-                  onPressed: () => _controller.start(),
+                RoundedButton(
+                  text: "Start",
                   color: Colors.green,
+                  onPressed: () => _controller.start(),
                 ),
-                MaterialButton(
-                  child: Text("Pause", style: TextStyle(color: Colors.white)),
-                  onPressed: () => _controller.pause(),
+                RoundedButton(
+                  text: "Pause",
                   color: Colors.blue,
+                  onPressed: () => _controller.pause(),
                 ),
-                MaterialButton(
-                  child: Text("Reset", style: TextStyle(color: Colors.white)),
+                RoundedButton(
+                  text: "Reset",
+                  color: Colors.red,
                   onPressed: () => _controller.reset(),
-                  color: Colors.red
-                ),
+                )
               ],
-            )
+            )            
           ],
         ),
       ),
+    );
+  }
+}
+
+class RoundedButton extends StatelessWidget{
+  final String text;
+  final Color color;
+  final void Function()? onPressed;
+
+  RoundedButton({
+    required this.text,
+    required this.color,
+    this.onPressed
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      child: Text(
+        text,
+        style: TextStyle(color: Colors.white)
+      ),
+      style: TextButton.styleFrom(
+        backgroundColor: color,
+        padding: EdgeInsets.symmetric(
+          vertical: 12.0,
+          horizontal: 24.0
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0)
+        ),
+      ),
+      onPressed: onPressed,
     );
   }
 }
