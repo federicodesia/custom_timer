@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 enum CustomTimerState { reset, paused, counting, finished }
 
 class CustomTimerController extends ChangeNotifier {
-  
   /// Controller for CustomTimer.
-  CustomTimerController({
-    this.initialState = CustomTimerState.reset
-  });
+  CustomTimerController({this.initialState = CustomTimerState.reset});
 
   /// Defines the initial state of the timer. By default it is `CustomTimerState.reset`
   final CustomTimerState initialState;
@@ -19,32 +16,32 @@ class CustomTimerController extends ChangeNotifier {
   CustomTimerState get state => _state;
 
   /// Timer pause function.
-  void pause(){
-    if(!_disposed){
+  void pause() {
+    if (!_disposed) {
       _state = CustomTimerState.paused;
       notifyListeners();
     }
   }
 
   /// Timer start function.
-  void start({bool disableNotifyListeners = false}){
-    if(!_disposed){
+  void start({bool disableNotifyListeners = false}) {
+    if (!_disposed) {
       _state = CustomTimerState.counting;
-      if(!disableNotifyListeners) notifyListeners();
+      if (!disableNotifyListeners) notifyListeners();
     }
   }
 
   /// Timer reset function.
-  void reset(){
-    if(!_disposed){
+  void reset() {
+    if (!_disposed) {
       _state = CustomTimerState.reset;
       notifyListeners();
     }
   }
 
   /// Timer finish function.
-  void finish(){
-    if(!_disposed){
+  void finish() {
+    if (!_disposed) {
       _state = CustomTimerState.finished;
       notifyListeners();
     }

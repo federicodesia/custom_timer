@@ -22,7 +22,8 @@ class CustomTimerRemainingTime {
   String get seconds => fill(duration.inSeconds.remainder(60));
 
   /// Get the remaining milliseconds always with three digits.
-  String get milliseconds => fill(duration.inMilliseconds.remainder(1000), count: 3);
+  String get milliseconds =>
+      fill(duration.inMilliseconds.remainder(1000), count: 3);
 
   /// Get the remaining hours without completing  with leading zeros.
   String get hoursWithoutFill => duration.inHours.remainder(24).toString();
@@ -34,5 +35,6 @@ class CustomTimerRemainingTime {
   String get secondsWithoutFill => duration.inSeconds.remainder(60).toString();
 
   /// Get the remaining milliseconds without completing  with leading zeros.
-  String get millisecondsWithoutFill => duration.inMilliseconds.remainder(1000).toString();
+  String get millisecondsWithoutFill =>
+      duration.inMilliseconds.remainder(1000).toString();
 }

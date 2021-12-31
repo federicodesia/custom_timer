@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:custom_timer/custom_timer.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -8,7 +9,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   final CustomTimerController _controller = CustomTimerController();
 
   @override
@@ -28,19 +28,15 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
             CustomTimer(
-              controller: _controller,
-              begin: Duration(days: 1),
-              end: Duration(),
-              builder: (remaining) {
-                return Text(
-                  "${remaining.hours}:${remaining.minutes}:${remaining.seconds}.${remaining.milliseconds}",
-                  style: TextStyle(fontSize: 24.0)
-                );
-              }
-            ),
-
+                controller: _controller,
+                begin: Duration(days: 1),
+                end: Duration(),
+                builder: (remaining) {
+                  return Text(
+                      "${remaining.hours}:${remaining.minutes}:${remaining.seconds}.${remaining.milliseconds}",
+                      style: TextStyle(fontSize: 24.0));
+                }),
             SizedBox(height: 24.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -61,7 +57,7 @@ class _MyAppState extends State<MyApp> {
                   onPressed: () => _controller.reset(),
                 )
               ],
-            )            
+            )
           ],
         ),
       ),
@@ -69,33 +65,22 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class RoundedButton extends StatelessWidget{
+class RoundedButton extends StatelessWidget {
   final String text;
   final Color color;
   final void Function()? onPressed;
 
-  RoundedButton({
-    required this.text,
-    required this.color,
-    this.onPressed
-  });
+  RoundedButton({required this.text, required this.color, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Text(
-        text,
-        style: TextStyle(color: Colors.white)
-      ),
+      child: Text(text, style: TextStyle(color: Colors.white)),
       style: TextButton.styleFrom(
         backgroundColor: color,
-        padding: EdgeInsets.symmetric(
-          vertical: 12.0,
-          horizontal: 24.0
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0)
-        ),
+        padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       ),
       onPressed: onPressed,
     );

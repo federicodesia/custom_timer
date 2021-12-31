@@ -1,3 +1,4 @@
+/// CustomTimer package.
 library custom_timer;
 
 export 'src/custom_timer_controller.dart';

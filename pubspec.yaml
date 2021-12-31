@@ -1,10 +1,10 @@
 name: custom_timer
-description: A Flutter package to create a customizable timer.
-version: 0.1.0
+description: A Flutter package to create a customizable timer with controller.
+version: 0.1.1
 homepage: https://github.com/federicodesia/custom_timer
 
 environment:
-  sdk: ">=2.15.1 <3.0.0"
+  sdk: ">=2.15.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
