@@ -88,7 +88,7 @@ CustomTimer(
 
 <br>
 
-## ⚙️ Installation
+## 🔧 Installation
 
 Add this to your package's pubspec.yaml file:
 ```yaml
@@ -109,7 +109,7 @@ import 'package:custom_timer/custom_timer.dart';
 
 <br>
 
-## 🙍🏻‍♂️ Author
+## 🙇 Author
 
 <br>
 
