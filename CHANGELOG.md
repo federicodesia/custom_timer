@@ -1,3 +1,9 @@
+## [0.1.2] - Aug. 7, 2022
+- Fix disposing of CustomTimerController
+
+## [0.1.1] - Dec. 31, 2021
+- Add pub tests
+
 ## [0.1.0] - Dec. 30, 2021
 
 New version of the package.
