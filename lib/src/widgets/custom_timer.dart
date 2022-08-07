@@ -67,6 +67,7 @@ class CustomTimer extends StatefulWidget {
 class _CustomTimerState extends State<CustomTimer>
     with TickerProviderStateMixin {
   late CustomTimerController _controller;
+  late bool _controllerDisposable;
   late AnimationController _animationController;
   late Animation<int> _animation;
 
@@ -74,6 +75,7 @@ class _CustomTimerState extends State<CustomTimer>
 
   @override
   void initState() {
+    _controllerDisposable = widget.controller == null;
     _controller = widget.controller ?? CustomTimerController();
     _controller.addListener(updateAnimationController);
 
@@ -133,7 +135,7 @@ class _CustomTimerState extends State<CustomTimer>
   @override
   void dispose() {
     _controller.removeListener(updateAnimationController);
-    _controller.dispose();
+    if (_controllerDisposable) _controller.dispose();
 
     _animationController.removeStatusListener(updateController);
     _animationController.dispose();
