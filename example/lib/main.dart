@@ -8,8 +8,14 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  final CustomTimerController _controller = CustomTimerController();
+class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+  late CustomTimerController _controller = CustomTimerController(
+    vsync: this,
+    begin: Duration(hours: 24),
+    end: Duration(),
+    initialState: CustomTimerState.reset,
+    interval: CustomTimerInterval.milliseconds
+  );
 
   @override
   void dispose() {
@@ -30,12 +36,16 @@ class _MyAppState extends State<MyApp> {
           children: <Widget>[
             CustomTimer(
                 controller: _controller,
-                begin: Duration(days: 1),
-                end: Duration(),
-                builder: (remaining) {
-                  return Text(
-                      "${remaining.hours}:${remaining.minutes}:${remaining.seconds}.${remaining.milliseconds}",
-                      style: TextStyle(fontSize: 24.0));
+                builder: (state, remaining) {
+                  // Build the widget you want!
+                  return Column(
+                    children: [
+                      Text("${state.name}", style: TextStyle(fontSize: 24.0)),
+                      Text(
+                          "${remaining.hours}:${remaining.minutes}:${remaining.seconds}.${remaining.milliseconds}",
+                          style: TextStyle(fontSize: 24.0))
+                    ],
+                  );
                 }),
             SizedBox(height: 24.0),
             Row(

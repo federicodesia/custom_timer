@@ -8,11 +8,12 @@ A Flutter package to create a customizable timer.
 
 - Timer controller.
 - Auto count up / down timer.
-- Custom builders.
+- Custom builder.
+- Millisecond support.
 
 <br>
 
-## 📌 Simple Usage
+## 📌 Usage
 
 <br>
 
@@ -20,16 +21,31 @@ A Flutter package to create a customizable timer.
 
 <br>
 
+Add SingleTickerProviderStateMixin to your stateful widget. 👇
+
 ```dart
-final CustomTimerController _controller = CustomTimerController();
+class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 ```
+
+Then define a CustomTimer controller
+
+```dart
+late CustomTimerController _controller = CustomTimerController(
+  vsync: this,
+  begin: Duration(hours: 24),
+  end: Duration(),
+  initialState: CustomTimerState.reset,
+  interval: CustomTimerInterval.milliseconds
+);
+```
+
+And you are ready to use the timer:
 
 ```dart
 CustomTimer(
   controller: _controller,
-  begin: Duration(days: 1),
-  end: Duration(),
-  builder: (time) {
+  builder: (state, time) {
+    // Build the widget you want!
     return Text(
       "${time.hours}:${time.minutes}:${time.seconds}.${time.milliseconds}",
       style: TextStyle(fontSize: 24.0)
@@ -38,53 +54,26 @@ CustomTimer(
 )
 ```
 
-Now you can use the controller methods `start()`, `pause()` and `reset()`. You can also add listeners to state changes or just use the `state` property when you need it.
-
-<br>
-
-## 📌 Using StateBuilder and AnimationBuilder 
-
-<br>
-
-![example2](https://user-images.githubusercontent.com/44307990/147802147-9b20e440-7a10-435f-a389-5310458af24c.gif)
-
-<br>
+Now you can use the controller methods:
 
 ```dart
-CustomTimer(
-  controller: _controller,
-  begin: Duration(days: 1),
-  end: Duration(),
-  builder: (time) {
-    return Text(
-      "${time.hours}:${time.minutes}:${time.seconds}.${time.milliseconds}",
-      style: TextStyle(fontSize: 24.0)
-    );
-  },
-  stateBuilder: (time, state) {
-    // This builder is shown when the state is different from "couting".
-    if(state == CustomTimerState.paused) return Text(
-      "The timer is paused",
-      style: TextStyle(fontSize: 24.0)
-    );
-
-    // If null is returned, "builder" is displayed.
-    return null;
-  },
-  animationBuilder: (child) {
-    // You can define your own state change animations.
-    // Remember to return the child widget of the builder.
-    return AnimatedSwitcher(
-      duration: Duration(milliseconds: 250),
-      child: child,
-    );
-  },
-  onChangeState: (state){
-    // This callback function runs when the timer state changes.
-    print("Current state: $state");
-  }
-)
+_controller.reset();
+_controller.start();
+_controller.pause();
+_controller.finish(); 
 ```
+
+You can also add listeners to state changes or just use the properties when you need them.
+
+```dart
+_controller.state.addListener(() {
+  print(_controller.state.value); // 👉 CustomTimerState.paused
+  print(_controller.remaining.value.hours); // 👉 12h
+});
+```
+
+Remember to dispose when you are no longer using it.
+
 
 <br>
 
@@ -93,7 +82,7 @@ CustomTimer(
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_timer: ^0.1.2
+  custom_timer: ^0.2.0
 ```
 
 Install it:

@@ -25,16 +25,16 @@ class CustomTimerRemainingTime {
   String get milliseconds =>
       fill(duration.inMilliseconds.remainder(1000), count: 3);
 
-  /// Get the remaining hours without completing  with leading zeros.
+  /// Get the remaining hours without completing with leading zeros.
   String get hoursWithoutFill => duration.inHours.remainder(24).toString();
 
-  /// Get the remaining minutes without completing  with leading zeros.
+  /// Get the remaining minutes without completing with leading zeros.
   String get minutesWithoutFill => duration.inMinutes.remainder(60).toString();
 
-  /// Get the remaining seconds without completing  with leading zeros.
+  /// Get the remaining seconds without completing with leading zeros.
   String get secondsWithoutFill => duration.inSeconds.remainder(60).toString();
 
-  /// Get the remaining milliseconds without completing  with leading zeros.
+  /// Get the remaining milliseconds without completing with leading zeros.
   String get millisecondsWithoutFill =>
       duration.inMilliseconds.remainder(1000).toString();
 }

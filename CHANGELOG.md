@@ -1,3 +1,10 @@
+## [0.2.0] - Jan. 12, 2023
+- Store the remaining time in the controller.
+- Subscribe to status changes.
+- Customize timer update intervals.
+- Removing stateBuilder and animationBuilder.
+- Other small fixes.
+
 ## [0.1.2] - Aug. 7, 2022
 - Fix disposing of CustomTimerController
 
