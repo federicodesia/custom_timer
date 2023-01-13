@@ -1,3 +1,6 @@
+## [0.2.1] - Jan. 13, 2023
+- Function to move the current time.
+
 ## [0.2.0] - Jan. 12, 2023
 - Store the remaining time in the controller.
 - Subscribe to status changes.

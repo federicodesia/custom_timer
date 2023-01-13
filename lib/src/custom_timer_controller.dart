@@ -134,6 +134,19 @@ class CustomTimerController extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Function to move the current time.
+  void jumpTo(Duration duration) {
+    final value = duration.inMilliseconds / (begin - end).inMilliseconds.abs();
+    final next = begin > end ? 1.0 - value : value;
+
+    if (next <= 0.0) return reset();
+    if (next >= 1.0) return finish();
+
+    _animationController.value = next;
+    _state.value = CustomTimerState.paused;
+    notifyListeners();
+  }
+
   @override
   void dispose() {
     _animation.removeListener(_listener);

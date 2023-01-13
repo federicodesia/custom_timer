@@ -45,7 +45,7 @@ And you are ready to use the timer:
 CustomTimer(
   controller: _controller,
   builder: (state, time) {
-    // Build the widget you want!
+    // Build the widget you want!🎉
     return Text(
       "${time.hours}:${time.minutes}:${time.seconds}.${time.milliseconds}",
       style: TextStyle(fontSize: 24.0)
@@ -60,7 +60,8 @@ Now you can use the controller methods:
 _controller.reset();
 _controller.start();
 _controller.pause();
-_controller.finish(); 
+_controller.finish();
+_controller.jumpTo(Duration(hours: 12));
 ```
 
 You can also add listeners to state changes or just use the properties when you need them.
@@ -82,7 +83,7 @@ Remember to dispose when you are no longer using it.
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_timer: ^0.2.0
+  custom_timer: ^0.2.1
 ```
 
 Install it:
