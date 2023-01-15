@@ -12,18 +12,31 @@ class CustomTimerController extends ChangeNotifier {
   final TickerProvider vsync;
 
   /// The start of the timer.
-  final Duration begin;
+  late Duration _begin;
+  Duration get begin => _begin;
+  set begin(Duration duration) {
+    final prev = remaining.value.duration;
+    _begin = duration;
+    _init();
+    jumpTo(prev);
+  }
 
   /// The end of the timer.
-  final Duration end;
+  late Duration _end;
+  Duration get end => _end;
+  set end(Duration duration) {
+    final prev = remaining.value.duration;
+    _end = duration;
+    _init();
+    jumpTo(prev);
+  }
 
   /// Defines the initial state of the timer. By default it is `CustomTimerState.reset`.
   final CustomTimerState initialState;
 
   /// The update interval of the timer. By default it is `CustomTimerUpdateInterval.milliseconds`.
-  final CustomTimerInterval interval;
+  CustomTimerInterval interval;
 
-  late bool _initialized = false;
   late AnimationController _animationController;
   late Animation<int> _animation;
 
@@ -50,29 +63,33 @@ class CustomTimerController extends ChangeNotifier {
   /// Remember to dispose when you are no longer using it.
   CustomTimerController({
     required this.vsync,
-    required this.begin,
-    required this.end,
+    required Duration begin,
+    required Duration end,
     this.initialState = CustomTimerState.reset,
     this.interval = CustomTimerInterval.milliseconds,
   }) {
-    final animationDuration = begin > end ? begin - end : end - begin;
+    _begin = begin;
+    _end = end;
+    _animationController = AnimationController(vsync: vsync);
+    _init();
 
-    _animationController =
-        AnimationController(duration: animationDuration, vsync: vsync);
+    if (initialState == CustomTimerState.finished)
+      finish();
+    else if (initialState == CustomTimerState.counting) start();
+
+    _animation.addListener(_listener);
+    _animation.addStatusListener(_statusListener);
+  }
+
+  void _init() {
+    _animationController.duration =
+        Duration(milliseconds: (begin - end).inMilliseconds.abs());
 
     final curvedAnimation =
         CurvedAnimation(parent: _animationController, curve: Curves.linear);
 
     _animation = IntTween(begin: begin.inMilliseconds, end: end.inMilliseconds)
         .animate(curvedAnimation);
-
-    if (initialState == CustomTimerState.finished)
-      finish();
-    else if (initialState == CustomTimerState.counting) start();
-    _initialized = true;
-
-    _animation.addListener(_listener);
-    _animation.addStatusListener(_statusListener);
   }
 
   void _listener() {
@@ -103,7 +120,6 @@ class CustomTimerController extends ChangeNotifier {
 
   /// Timer reset function.
   void reset() {
-    if (state.value == CustomTimerState.reset) return;
     _animationController.reset();
     _state.value = CustomTimerState.reset;
     notifyListeners();
@@ -111,7 +127,6 @@ class CustomTimerController extends ChangeNotifier {
 
   /// Timer start function.
   void start() {
-    if (_initialized && state.value == CustomTimerState.counting) return;
     if (state.value == CustomTimerState.finished) _animationController.reset();
     _animationController.forward();
 
@@ -119,18 +134,20 @@ class CustomTimerController extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Timer pause function.
-  void pause() {
-    if (state.value != CustomTimerState.counting) return;
-
+  void _pause() {
     _animationController.stop();
     _state.value = CustomTimerState.paused;
     notifyListeners();
   }
 
+  /// Timer pause function.
+  void pause() {
+    if (state.value != CustomTimerState.counting) return;
+    _pause();
+  }
+
   /// Timer finish function.
   void finish() {
-    if (_initialized && state.value == CustomTimerState.finished) return;
     _animationController.stop();
     _animationController.value = 1.0;
     _state.value = CustomTimerState.finished;
@@ -145,16 +162,14 @@ class CustomTimerController extends ChangeNotifier {
     final value = (duration.inMilliseconds - a) / (b - a);
     final next = _isCountUp ? value : 1.0 - value;
 
-    if (next <= 0.0) return reset();
+    if (next <= 0.0 && state.value != CustomTimerState.counting) return reset();
     if (next >= 1.0) return finish();
 
     _animationController.value = next;
     if (state.value == CustomTimerState.counting)
-      _animationController.forward();
-    else {
-      _state.value = CustomTimerState.paused;
-      notifyListeners();
-    }
+      start();
+    else
+      _pause();
   }
 
   @override

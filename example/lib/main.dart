@@ -11,8 +11,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   late CustomTimerController _controller = CustomTimerController(
     vsync: this,
-    begin: Duration(hours: 24),
-    end: Duration(),
+    begin: Duration(seconds: 1),
+    end: Duration(seconds: 12),
     initialState: CustomTimerState.reset,
     interval: CustomTimerInterval.milliseconds
   );
@@ -65,6 +65,38 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   text: "Reset",
                   color: Colors.red,
                   onPressed: () => _controller.reset(),
+                )
+              ],
+            ),
+            SizedBox(height: 12.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                RoundedButton(
+                  text: "Begin 5s",
+                  color: Colors.purple,
+                  onPressed: () => _controller.begin = Duration(seconds: 5),
+                ),
+                RoundedButton(
+                  text: "End 5s",
+                  color: Colors.purple,
+                  onPressed: () => _controller.end = Duration(seconds: 5),
+                ),
+              ],
+            ),
+            SizedBox(height: 12.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                RoundedButton(
+                  text: "Jump to 5s",
+                  color: Colors.indigo,
+                  onPressed: () => _controller.jumpTo(Duration(seconds: 5)),
+                ),
+                RoundedButton(
+                  text: "Finish",
+                  color: Colors.orange,
+                  onPressed: () => _controller.finish(),
                 )
               ],
             )
