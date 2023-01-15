@@ -1,3 +1,6 @@
+## [0.2.3] - Jan. 15, 2023
+- Pass pub static analysis.
+
 ## [0.2.2] - Jan. 15, 2023
 - Fix jumpTo function.
 - Add setters for begin and end.

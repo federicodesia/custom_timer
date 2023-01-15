@@ -93,7 +93,7 @@ Remember to dispose when you are no longer using it.
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_timer: ^0.2.2
+  custom_timer: ^0.2.3
 ```
 
 Install it:

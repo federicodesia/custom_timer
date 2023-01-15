@@ -55,9 +55,6 @@ class CustomTimerController extends ChangeNotifier {
   /// Current remaining time.
   ValueNotifier<CustomTimerRemainingTime> get remaining => _remaining;
 
-  bool get _isCountUp => begin < end;
-  bool get _isCountdown => begin > end;
-
   /// Controls the state of the timer.
   /// Allows you to execute the `start()`, `pause()`, `reset()` and `finish()` functions. It also allows you to get or subscribe to the current `state` and `remaining` time.
   /// Remember to dispose when you are no longer using it.
@@ -156,11 +153,13 @@ class CustomTimerController extends ChangeNotifier {
 
   /// Function to move the current time.
   void jumpTo(Duration duration) {
-    final a = _isCountUp ? begin.inMilliseconds : end.inMilliseconds;
-    final b = _isCountUp ? end.inMilliseconds : begin.inMilliseconds;
+    final isCountUp = begin < end;
+
+    final a = isCountUp ? begin.inMilliseconds : end.inMilliseconds;
+    final b = isCountUp ? end.inMilliseconds : begin.inMilliseconds;
 
     final value = (duration.inMilliseconds - a) / (b - a);
-    final next = _isCountUp ? value : 1.0 - value;
+    final next = isCountUp ? value : 1.0 - value;
 
     if (next <= 0.0 && state.value != CustomTimerState.counting) return reset();
     if (next >= 1.0) return finish();
