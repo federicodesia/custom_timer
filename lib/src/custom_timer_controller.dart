@@ -172,6 +172,16 @@ class CustomTimerController extends ChangeNotifier {
       _pause();
   }
 
+  /// Function to increase the remaining time.
+  void add(Duration duration) {
+    jumpTo(_remaining.value.duration + duration);
+  }
+
+  /// Function to decrease the remaining time.
+  void subtract(Duration duration) {
+    jumpTo(_remaining.value.duration - duration);
+  }
+
   @override
   void dispose() {
     _animation.removeListener(_listener);

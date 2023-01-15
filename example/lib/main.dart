@@ -73,12 +73,12 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 RoundedButton(
-                  text: "Begin 5s",
+                  text: "Set Begin to 5s",
                   color: Colors.purple,
                   onPressed: () => _controller.begin = Duration(seconds: 5),
                 ),
                 RoundedButton(
-                  text: "End 5s",
+                  text: "Set End to 5s",
                   color: Colors.purple,
                   onPressed: () => _controller.end = Duration(seconds: 5),
                 ),
@@ -97,6 +97,22 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   text: "Finish",
                   color: Colors.orange,
                   onPressed: () => _controller.finish(),
+                )
+              ],
+            ),
+            SizedBox(height: 12.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                RoundedButton(
+                  text: "Add 5s",
+                  color: Colors.teal,
+                  onPressed: () => _controller.add(Duration(seconds: 5)),
+                ),
+                RoundedButton(
+                  text: "Subtract 5s",
+                  color: Colors.teal,
+                  onPressed: () => _controller.subtract(Duration(seconds: 5)),
                 )
               ],
             )

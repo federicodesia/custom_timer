@@ -1,3 +1,8 @@
+## [0.2.2] - Jan. 15, 2023
+- Fix jumpTo function.
+- Add setters for begin and end.
+- Functions to increase/decrease the remaining time.
+
 ## [0.2.1] - Jan. 13, 2023
 - Function to move the current time.
 

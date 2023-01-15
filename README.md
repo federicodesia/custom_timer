@@ -61,10 +61,20 @@ _controller.reset();
 _controller.start();
 _controller.pause();
 _controller.finish();
+
+_controller.add(Duration(minutes: 30));
+_controller.subtract(Duration(minutes: 30));
 _controller.jumpTo(Duration(hours: 12));
 ```
 
-You can also add listeners to state changes or just use the properties when you need them.
+You can also set the begin or end, even with the counter running:
+```dart
+_controller.begin = Duration();
+_controller.end = Duration(hours 12);
+```
+
+
+And add listeners to state changes or just use the properties when you need them:
 
 ```dart
 _controller.state.addListener(() {
@@ -83,7 +93,7 @@ Remember to dispose when you are no longer using it.
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  custom_timer: ^0.2.1
+  custom_timer: ^0.2.2
 ```
 
 Install it:
